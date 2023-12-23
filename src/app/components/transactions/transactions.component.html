@@ -1,0 +1,41 @@
+<div class="container d-flex align-items-center justify-content-center">
+  <div class="text-center">
+    <h1 class="display-6">Transactions</h1>
+    @if (error) {
+      <p>Error: {{ error }}</p>
+    } @else {
+      @if (transactions) {
+        <table class="table">
+          <caption>All Transactions - 2023</caption>
+          <thead>
+          <tr>
+            <th scope="col"># ID</th>
+            <th scope="col">Amount</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Status</th>
+            <th scope="col">Operations</th>
+          </tr>
+          </thead>
+          <tbody>
+
+            @for (transaction of transactions;track transaction.id) {
+              <tr>
+                <th scope="row">{{ transaction.id }}</th>
+                <td>{{ transaction.amount }}</td>
+                <td>{{ transaction.currencyFrom }}</td>
+                <td>{{ transaction.currencyTo }}</td>
+                <td>{{ transaction.status }}</td>
+                <td>
+                  <button class="btn btn-outline-primary">Print</button>
+                  <button class="btn btn-outline-warning me-2 ms-2">Edit</button>
+                  <button class="btn btn-outline-danger">Delete</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    }
+  </div>
+</div>

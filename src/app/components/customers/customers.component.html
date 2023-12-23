@@ -1,0 +1,73 @@
+<div class="container d-flex align-items-center justify-content-center">
+  <div class="text-center">
+    <h1 class="display-6">Customers</h1>
+    @if (error) {
+      <p>Error: {{ error }}</p>
+    } @else {
+      @if (customers) {
+        <table class="table">
+          <caption>Customers Results 2023</caption>
+          <thead>
+          <tr>
+            <th scope="col"># Id</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Email</th>
+            <th scope="col">Operations</th>
+          </tr>
+          </thead>
+          <tbody>
+
+            @for (customer of customers;track customer.id) {
+              <tr>
+                <th scope="row">{{ customer.id }}</th>
+                <td>{{ customer.lastName }}, {{ customer.name }}</td>
+                <td>{{ customer.documentNumber }}</td>
+                <td>{{ customer.email }}</td>
+                <td>
+
+                  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal"
+                          data-bs-target="#detailsModal">
+                    Customer Details
+                  </button>
+
+                  <div class="modal fade" id="detailsModal" tabindex="-1" aria-labelledby="detailsModalLabel"
+                       aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="detailsModalLabel">Additional Information</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <h5>Date information:</h5>
+                          <p>Date of Birth: {{ customer.dateOfBirth }}</p>
+                          <p>Created Date: {{ customer.createdDate | date: 'medium' }}</p>
+                          <p>Last Modified Date: {{ customer.lastModifiedDate || 'N/A' }}</p>
+
+                          <h5>Address:</h5>
+                          <p>Street: {{ customer.address.street }}</p>
+                          <p>City: {{ customer.address.city }}</p>
+                          <p>Country: {{ customer.address.country }}</p>
+                          <p>Postal Code: {{ customer.address.postalCode }}</p>
+
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-outline-primary me-2 ms-2">Transactions Details</button>
+                  <button class="btn btn-outline-warning me-2">Edit</button>
+                  <button class="btn btn-outline-danger">Delete</button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      }
+    }
+  </div>
+</div>
